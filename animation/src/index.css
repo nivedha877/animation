@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #111;
+}
+
+/* creates scroll */
+.scroll-container {
+  height: 300vh;
+}
+
+/* sticky viewport */
+.sticky-wrapper {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* BACKGROUND PARALLAX */
+.background-layer {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  display: flex;
+  gap: 40px;
+  opacity: 0.4;
+}
+
+.background-layer img {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* MAIN PARALLAX */
+.main-layer {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  display: flex;
+  gap: 60px;
+}
+
+.main-layer img {
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  object-fit: cover;
+}
