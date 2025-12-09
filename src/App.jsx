@@ -15,6 +15,10 @@ function App() {
 
   return (
     <div className="container">
+      <div className="header">
+        <h1 className="title">Gallery Showcase</h1>
+        <p className="subtitle">Explore our stunning collection</p>
+      </div>
       <div className="carousel">
         {images.map((img, i) => (
           <div
@@ -23,13 +27,25 @@ function App() {
             style={{ "--i": i - current }}
             onClick={() => setCurrent(i)}
           >
-            <img src={img} alt="" />
+            <img src={img} alt={`Gallery ${i + 1}`} />
+            <div className="card-overlay">
+              <span className="card-number">{i + 1} / {images.length}</span>
+            </div>
           </div>
         ))}
       </div>
       <div className="controls">
-        <button onClick={() => setCurrent((current - 1 + images.length) % images.length)}>‹</button>
-        <button onClick={() => setCurrent((current + 1) % images.length)}>›</button>
+        <button onClick={() => setCurrent((current - 1 + images.length) % images.length)} aria-label="Previous">
+          <span>‹</span>
+        </button>
+        <div className="indicator">
+          {images.map((_, i) => (
+            <span key={i} className={`dot ${i === current ? "active" : ""}`} onClick={() => setCurrent(i)} />
+          ))}
+        </div>
+        <button onClick={() => setCurrent((current + 1) % images.length)} aria-label="Next">
+          <span>›</span>
+        </button>
       </div>
     </div>
   );

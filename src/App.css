@@ -5,8 +5,9 @@
 }
 
 body {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
   overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .container {
@@ -15,13 +16,36 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  perspective: 1000px;
+  perspective: 1500px;
+  gap: 30px;
+}
+
+.header {
+  text-align: center;
+  color: white;
+  animation: fadeInDown 1s ease-out;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  background: linear-gradient(to right, #fff, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 2px;
 }
 
 .carousel {
   position: relative;
-  width: 400px;
-  height: 500px;
+  width: 450px;
+  height: 550px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,51 +56,152 @@ body {
   width: 100%;
   height: 100%;
   transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  transform: translateX(calc(var(--i) * 420px)) scale(calc(1 - abs(var(--i)) * 0.15));
-  opacity: calc(1 - abs(var(--i)) * 0.4);
+  transform: translateX(calc(var(--i) * 480px)) scale(calc(1 - abs(var(--i)) * 0.2)) rotateY(calc(var(--i) * -15deg));
+  opacity: calc(1 - abs(var(--i)) * 0.5);
   cursor: pointer;
-  filter: blur(calc(abs(var(--i)) * 3px));
+  filter: blur(calc(abs(var(--i)) * 4px));
   pointer-events: none;
 }
 
 .card.active {
   z-index: 10;
   pointer-events: auto;
+  animation: cardPulse 2s ease-in-out infinite;
 }
 
 .card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 25px;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6), 0 0 40px rgba(167, 139, 250, 0.3);
+  border: 3px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-overlay {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 8px 16px;
   border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.card-number {
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
 .controls {
-  margin-top: 50px;
   display: flex;
-  gap: 20px;
+  align-items: center;
+  gap: 30px;
+  animation: fadeInUp 1s ease-out;
 }
 
 .controls button {
-  width: 60px;
-  height: 60px;
+  width: 65px;
+  height: 65px;
   border: none;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.9);
-  font-size: 30px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(167, 139, 250, 0.9));
+  font-size: 35px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.controls button span {
+  color: #1e3c72;
+  font-weight: bold;
+}
+
+.controls button:hover {
+  background: linear-gradient(135deg, #fff, #c4b5fd);
+  transform: scale(1.15) translateY(-3px);
+  box-shadow: 0 15px 40px rgba(167, 139, 250, 0.5);
+}
+
+.controls button:active {
+  transform: scale(1.05);
+}
+
+.indicator {
+  display: flex;
+  gap: 12px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
   cursor: pointer;
   transition: all 0.3s;
 }
 
-.controls button:hover {
-  background: #fff;
-  transform: scale(1.1);
+.dot:hover {
+  background: rgba(255, 255, 255, 0.7);
+  transform: scale(1.2);
+}
+
+.dot.active {
+  background: white;
+  width: 35px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cardPulse {
+  0%, 100% {
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6), 0 0 40px rgba(167, 139, 250, 0.3);
+  }
+  50% {
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6), 0 0 60px rgba(167, 139, 250, 0.6);
+  }
 }
 
 @media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+  }
+  .subtitle {
+    font-size: 1rem;
+  }
   .carousel {
-    width: 300px;
-    height: 400px;
+    width: 320px;
+    height: 420px;
+  }
+  .controls button {
+    width: 50px;
+    height: 50px;
+    font-size: 28px;
   }
 }
